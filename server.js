@@ -1,5 +1,7 @@
 const express = require('express');
+const jwt = require('jsonwebtoken')
 const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
 
@@ -20,6 +22,9 @@ app.use('/api/products', router)
 
 const router1 = require('./routes/reviewRouter.js')
 app.use('/api/reviews', router1)
+
+const userRoutes = require('./routes/userRouter.js')
+app.use('/api/users', userRoutes)
 
 
 // testing api
