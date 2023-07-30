@@ -1,43 +1,36 @@
 const express = require('express');
-const jwt = require('jsonwebtoken')
 const cors = require('cors');
-require('dotenv').config();
+const dotenv = require('dotenv');
+const authConfig = require('./config/authConfig.js');
+const routes = require('./routes');
+
+// Load environment variables from .env file
+dotenv.config();
 
 const app = express();
 
-var corOptions = {
+// CORS options
+const corOptions = {
   origin: 'https://localhost:8081'
 };
 
-
-// middleware
+// Middleware
 app.use(cors(corOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// routers
+// Routers
+app.use('/api', routes);
 
-const router = require('./routes/productRouter.js')
-app.use('/api/products', router)
-
-const router1 = require('./routes/reviewRouter.js')
-app.use('/api/reviews', router1)
-
-const userRoutes = require('./routes/userRouter.js')
-app.use('/api/users', userRoutes)
-
-
-// testing api
+// Testing API
 app.get('/', (req, res) => {
   res.json({ message: 'Hello from Test Project' });
 });
 
-
-// port
+// Port
 const PORT = process.env.PORT || 8080;
 
-
-// server
+// Server
 app.listen(PORT, () => {
-  console.log(`server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
