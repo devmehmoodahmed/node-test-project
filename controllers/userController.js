@@ -14,12 +14,6 @@ const signUp = async (req, res) => {
   res.status(200).send(user);
 };
 
-
-
-
-
-
-
 const login = async (req, res) => {
   const secretKey = process.env.SECRET_KEY;
   let user = {
@@ -33,14 +27,6 @@ const login = async (req, res) => {
     })
   })
 };
-
-
-
-
-
-
-
-
 
 const fetchAllUsers = async (req, res) => {
   let users = await User.findAll({});
