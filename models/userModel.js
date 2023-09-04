@@ -1,7 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define("user", {
+  const User = sequelize.define('User', {
     name: {
       type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
     },
     email: {
       type: DataTypes.STRING,
@@ -9,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       validate: {
         isEmail: {
-          msg: "Invalid email format",
+          msg: 'Invalid email format',
         },
       },
     },
@@ -18,14 +20,17 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         len: {
-          args: [8,],
-          msg: "Password should be minimum 8 characters",
+          args: [8],
+          msg: 'Password should be a minimum of 8 characters',
         },
       },
     },
     dob: {
       type: DataTypes.DATE,
     },
+  }, {
+    timestamps: true, 
+    tableName: 'users',
   });
 
   return User;
